@@ -1,9 +1,10 @@
 #LLM
-import os
-
 from langchain_openai import ChatOpenAI
+from dotenv import dotenv_values
 
-api_key = os.environ["OPENROUTER_API_KEY"]
+env_values = dotenv_values("./.env")
+
+api_key = env_values["api_key"]
 
 llm = ChatOpenAI(
     api_key=api_key,
@@ -95,4 +96,6 @@ prompt = temp.format(context="\n\n".join(context), Question=query)
 # print(prompt)
 
 response = llm.invoke(prompt).content
-print("\n\nResponse:\n", response)
+
+print(f"Answer:\n{response}")
+
